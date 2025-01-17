@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Pathologies</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f9fc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 5px solid #0056b3;
+        }
+
+        main {
+            margin: 20px auto;
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1, h2 {
+            margin: 0 0 15px;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #333;
+        }
+
+        h2 {
+            font-size: 22px;
+            color: #555;
+        }
+
+        ul {
+            padding: 0;
+            list-style: none;
+        }
+
+        ul li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+        .pathology-details {
+            flex: 1;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #c82333;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+            background: #f1f1f1;
+            font-size: 14px;
+            color: #888;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 24px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            main {
+                padding: 15px;
+            }
+
+            .buttons-container {
+                flex-direction: column;
+                align-items: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Liste des Pathologies</h1>
+    </header>
+    <main>
+        <h2>Voici la liste des pathologies :</h2>
+
+        <ul>
+            {% for pathology in pathologies %}
+                <li>
+                    <div class="pathology-details">
+                        <strong>{{ pathology.name }}</strong> - {{ pathology.propriete }}
+                    </div>
+                    <div class="actions">
+                        <!-- Lien pour modifier la pathologie -->
+                        <a href="{{ url_for('update_pathology', pathology_id=pathology.id) }}">Modifier</a>
+                        <!-- Formulaire pour supprimer la pathologie -->
+                        <form action="{{ url_for('delete_pathology', pathology_id=pathology.id) }}" method="POST" style="display:inline;">
+                            <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette pathologie ?');">Supprimer</button>
+                        </form>
+                    </div>
+                </li>
+            {% else %}
+                <li>Aucune pathologie trouvée.</li>
+            {% endfor %}
+        </ul>
+
+        <div class="buttons-container">
+            <!-- Bouton pour créer une nouvelle pathologie -->
+            <a href="{{ url_for('create_pathology') }}" class="btn">Créer une pathologie</a>
+            <!-- Bouton pour retourner à la page principale -->
+            <a href="{{ url_for('home') }}" class="btn">Retour à la page principale</a>
+        </div>
+    </main>
+
+</body>
+</html>

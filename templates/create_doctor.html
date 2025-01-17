@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un Médecin</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f9fc;
+            color: #333;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 5px solid #0056b3;
+        }
+
+        main {
+            margin: 30px auto;
+            max-width: 500px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #0056b3;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Gestion Médicale</h1>
+    </header>
+    <main>
+        <h1>Créer un Médecin</h1>
+        <form method="POST">
+            <div>
+                <label for="id">Id du Médecin</label>
+                <input type="text" id="id" name="id" placeholder="Id du médecin" required>
+            </div>
+            <div>
+                <label for="name">Nom du Médecin</label>
+                <input type="text" id="name" name="name" placeholder="Nom du médecin" required>
+            </div>
+            <div>
+                <label for="specialty">Spécialité</label>
+                <input type="text" id="specialty" name="specialty" placeholder="Spécialité" required>
+            </div>
+            <button type="submit">Créer un médecin</button>
+        </form>
+        <a href="{{ url_for('home') }}">HOME</a>
+    </main>
+</body>
+</html>
+

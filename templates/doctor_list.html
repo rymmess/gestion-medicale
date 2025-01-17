@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Médecins</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        main {
+            margin: 20px auto;
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #0056b3;
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        li:last-child {
+            border-bottom: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .buttons a {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .buttons a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Liste des Médecins</h1>
+    </header>
+    <main>
+        <ul>
+            {% for doctor in doctors %}
+            <li>
+                <span>
+                    <strong>{{ doctor['name'] }}</strong> - {{ doctor['specialty'] }}
+                </span>
+                <span>{{ patients_count[doctor['id']] if patients_count[doctor['id']] else 0 }} patients</span>
+                <a href="{{ url_for('appointment_list', doctor_id=doctor['id']) }}">Voir les rendez-vous</a>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <div class="buttons">
+            <a href="{{ url_for('create_doctor') }}">Créer un nouveau médecin</a>
+            <a href="{{ url_for('home') }}">HOME</a>
+        </div>
+    </main>
+</body>
+</html>
